@@ -14,6 +14,8 @@ import com.nighthawk.spring_portfolio.mvc.person.Person;
 import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
 import com.nighthawk.spring_portfolio.mvc.leaderboard.Leaderboard;
 import com.nighthawk.spring_portfolio.mvc.leaderboard.LeaderboardJpaRepository;
+import com.nighthawk.spring_portfolio.mvc.spacebook.Spacebook;
+import com.nighthawk.spring_portfolio.mvc.spacebook.SpacebookJpaRepository;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +27,7 @@ public class ModelInit {
     @Autowired NoteJpaRepository noteRepo;
     @Autowired PersonDetailsService personService;
     @Autowired LeaderboardJpaRepository leaderboardRepo;
+    @Autowired SpacebookJpaRepository spacebookRepo;
 
     @Bean
     CommandLineRunner run() {  // The run() method will be executed after the application starts
@@ -57,6 +60,12 @@ public class ModelInit {
                 List<Leaderboard> leaderboardFound = leaderboardRepo.findByLeaderboardIgnoreCase(leaderboard);  // JPA lookup
                 if (leaderboardFound.size() == 0)
                     leaderboardRepo.save(new Leaderboard(null, leaderboard, leaderboardHash.get(leaderboard))); //JPA save
+            }
+            HashMap<String, Integer> spacebookHash = Spacebook.init();
+            for (String spacebook : spacebookHash.keySet()) {
+                List<Spacebook> spacebookFound = spacebookRepo.findBySpacebookIgnoreCase(spacebook);  // JPA lookup
+                if (spacebookFound.size() == 0)
+                    spacebookRepo.save(new Spacebook(null, spacebook, spacebookHash.get(spacebook))); //JPA save
             }
         };
     }
