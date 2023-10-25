@@ -67,6 +67,7 @@ public class ModelInit {
                 if (spacebookFound.size() == 0)
                     spacebookRepo.save(new Spacebook(null, spacebook, spacebookHash.get(spacebook))); //JPA save
             }
+            
         };
     }
 }
