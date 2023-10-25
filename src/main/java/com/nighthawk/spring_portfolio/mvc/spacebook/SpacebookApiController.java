@@ -75,8 +75,10 @@ public class SpacebookApiController {
             try (FileOutputStream fos = new FileOutputStream(serverFile)) {
                 fos.write(file.getBytes());
             }
+
         } catch (IOException e) {
             return "File upload failed: " + e.getMessage();
         }
+        return "File uploaded successfully.";
     }
 }
