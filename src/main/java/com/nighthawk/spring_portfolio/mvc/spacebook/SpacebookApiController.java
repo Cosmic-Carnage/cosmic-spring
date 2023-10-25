@@ -75,14 +75,6 @@ public class SpacebookApiController {
             try (FileOutputStream fos = new FileOutputStream(serverFile)) {
                 fos.write(file.getBytes());
             }
-
-            // Generate the download URL for the uploaded image
-            String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("/api/images/download/")
-                    .path(uniqueFileName)
-                    .toUriString();
-
-            return "File uploaded successfully. Download URL: " + fileDownloadUri;
         } catch (IOException e) {
             return "File upload failed: " + e.getMessage();
         }
